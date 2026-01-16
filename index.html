@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Meta Information -->
     <meta charset="UTF-8">
@@ -9,803 +10,9 @@
     <!-- Stylesheets -->
     <link rel="icon" type="image/jpeg" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        /* --- RESET & VARIABLES --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #4F46E5;
-            --secondary-color: #6366F1;
-            --text-dark: #1F2937;
-            --text-light: #6B7280;
-            --bg-light: #F9FAFB;
-            --white: #FFFFFF;
-            --border: #E5E7EB;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: var(--white);
-        }
-
-        /* --- HEADER --- */
-        header {
-            background: var(--white);
-            padding: 15px 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5em;
-            font-weight: 800;
-            color: var(--text-dark);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-symbol {
-            background: var(--primary-color);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 0.8em;
-            font-family: 'Courier New', monospace;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .nav-links a.active-link {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-        
-        .nav-links a.active-link::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-color);
-        }
-
-        /* --- HAMBURGER MENU --- */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background-color: var(--text-dark);
-            transition: all 0.3s;
-        }
-
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
-
-        /* Mobile Menu */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 70px;
-            left: 0;
-            width: 100%;
-            background: var(--white);
-            padding: 20px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            z-index: 999;
-            text-align: center;
-            border-top: 1px solid var(--border);
-        }
-
-        .mobile-menu.active {
-            display: block;
-            animation: slideDown 0.3s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .mobile-menu ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .mobile-menu ul li a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-size: 1.1em;
-            font-weight: 500;
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            max-width: 1200px;
-            margin: 80px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero-content h2 {
-            font-size: 1em;
-            color: var(--text-light);
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5em;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-
-        .hero-content .subtitle {
-            font-size: 1.3em;
-            color: var(--text-light);
-            margin-bottom: 30px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            color: var(--white);
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: var(--bg-light);
-            color: var(--text-dark);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--border);
-        }
-
-        .hero-image {
-            display: flex;
-            justify-content: center;
-        }
-
-        .profile-circle {
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 8px solid var(--white);
-            
-            box-shadow: 0 20px 80px rgba(79, 70, 229, 0.6); 
-        }
-
-        .profile-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            
-            /* ADD THIS LINE: Focus on the top of the image */
-            object-position: top; 
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 0;
-        }
-
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: var(--bg-light);
-            color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 1.2em;
-            cursor: pointer;
-        }
-
-        .social-links a:hover {
-            background: var(--primary-color);
-            color: var(--white);
-            transform: translateY(-3px);
-        }
-
-        /* --- SECTIONS COMMON --- */
-        section {
-            max-width: 1200px;
-            margin: 100px auto;
-            padding: 0 20px;
-            scroll-margin-top: 100px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5em;
-            font-weight: 700;
-            margin-bottom: 60px;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--primary-color);
-            margin: 15px auto 0;
-            border-radius: 2px;
-        }
-
-        /* --- NEW ABOUT SECTION --- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 50px;
-            align-items: start;
-        }
-
-        .about-text {
-            font-size: 1.05em;
-            color: var(--text-dark);
-            line-height: 1.8;
-        }
-
-        .about-text p {
-            color: var(--text-light);
-            margin-bottom: 25px;
-        }
-
-        .about-highlights {
-            list-style: none;
-            margin-top: 20px;
-        }
-
-        .about-highlights li {
-            margin-bottom: 15px;
-            padding-left: 20px;
-            position: relative;
-            color: var(--text-light);
-            font-size: 0.95em;
-        }
-
-        .about-highlights li::before {
-            content: '•';
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.5em;
-            position: absolute;
-            left: 0;
-            top: -5px; 
-            line-height: 1;
-        }
-
-        .about-highlights strong {
-            color: var(--text-dark);
-            font-weight: 700;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .stat-card {
-            background: var(--white);
-            padding: 30px 20px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06); 
-            border: 1px solid #f0f0f0;
-            transition: transform 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-card h3 {
-            font-size: 2.2em;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-            font-weight: 800;
-        }
-
-        .stat-card p {
-            color: var(--text-dark);
-            font-size: 0.9em;
-            font-weight: 500;
-        }
-
-        /* --- NEW EXPERIENCE SECTION (Expandable) --- */
-        .experience-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            transition: box-shadow 0.3s ease;
-            position: relative;
-        }
-
-        .experience-card:hover {
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-
-        .exp-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .exp-icon-title {
-            display: flex;
-            gap: 15px;
-        }
-
-        .exp-icon {
-            width: 45px;
-            height: 45px;
-            background: #E0E7FF;
-            color: var(--primary-color);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2em;
-            flex-shrink: 0;
-        }
-
-        .exp-title h3 {
-            font-size: 1.2em;
-            margin-bottom: 4px;
-            color: var(--text-dark);
-        }
-
-        .exp-company {
-            font-weight: 600;
-            color: var(--text-dark);
-            font-size: 0.95em;
-        }
-
-        .exp-meta {
-            margin-top: 10px;
-            display: flex;
-            gap: 20px;
-            color: var(--text-light);
-            font-size: 0.9em;
-            align-items: center;
-        }
-
-        .exp-meta i {
-            margin-right: 5px;
-        }
-
-        .exp-summary {
-            margin-top: 15px;
-            color: var(--text-dark);
-            font-size: 1em;
-            line-height: 1.6;
-        }
-
-        .toggle-btn {
-            background: none;
-            border: none;
-            color: var(--primary-color);
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.9em;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 0;
-            transition: color 0.3s;
-        }
-
-        .toggle-btn:hover {
-            color: var(--secondary-color);
-        }
-
-        .experience-details {
-            display: none;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-            animation: fadeIn 0.4s ease;
-        }
-
-        .experience-details.show {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .detail-section-title {
-            font-size: 1em;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text-dark);
-        }
-
-        .achievements-list {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .achievements-list li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 10px;
-            color: var(--text-light);
-            font-size: 0.95em;
-        }
-
-        .achievements-list li::before {
-            content: '•';
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.5em;
-            position: absolute;
-            left: 0;
-            top: -6px;
-        }
-
-        .exp-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .exp-tag {
-            background: #EFF6FF;
-            color: var(--primary-color);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.85em;
-            font-weight: 500;
-        }
-
-        /* --- PROJECTS --- */
-        #projects {
-            background: var(--bg-light);
-            padding: 100px 0;
-            width: 100%;
-            max-width: 100%;
-            margin: 0;
-        }
-        
-        #projects > div {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .project-card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 35px;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-color: var(--primary-color);
-        }
-
-        .project-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-color);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: auto; 
-            padding-top: 20px;
-        }
-
-        .tech-tag {
-            background: var(--bg-light);
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 0.85em;
-            color: var(--text-dark);
-            border: 1px solid #E5E7EB;
-        }
-
-        /* --- SKILLS --- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .skill-category {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px;
-            transition: transform 0.3s;
-        }
-        
-        .skill-category:hover {
-            transform: translateY(-5px);
-        }
-
-        .skill-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-color);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-item {
-            background: var(--bg-light);
-            padding: 8px 15px;
-            border-radius: 6px;
-            font-size: 0.9em;
-        }
-
-        /* --- CONTACT --- */
-        #contact {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 100px 20px;
-            text-align: center;
-        }
-
-        #contact h2, #contact p {
-            color: var(--white);
-        }
-        
-        #contact .section-title::after {
-            background: var(--white);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 900px;
-            margin: 40px auto;
-        }
-
-        .contact-item {
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-        }
-
-        .contact-item a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background: #1F2937;
-            color: var(--white);
-            padding: 60px 20px 30px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-links ul {
-            list-style: none;
-        }
-        
-        .footer-links a {
-            color: #9CA3AF;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--white);
-        }
-
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 30px;
-            border-top: 1px solid #374151;
-            text-align: center;
-            color: #9CA3AF;
-        }
-
-        /* --- TOAST NOTIFICATION --- */
-        #toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 8px;
-            padding: 16px;
-            position: fixed;
-            z-index: 1001;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%);
-            font-size: 17px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        #toast.show {
-            visibility: visible;
-            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-
-        @-webkit-keyframes fadein {
-            from {bottom: 0; opacity: 0;} 
-            to {bottom: 30px; opacity: 1;}
-        }
-
-        @keyframes fadein {
-            from {bottom: 0; opacity: 0;}
-            to {bottom: 30px; opacity: 1;}
-        }
-
-        @-webkit-keyframes fadeout {
-            from {bottom: 30px; opacity: 1;} 
-            to {bottom: 0; opacity: 0;}
-        }
-
-        @keyframes fadeout {
-            from {bottom: 30px; opacity: 1;}
-            to {bottom: 0; opacity: 0;}
-        }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 1024px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .hero-image { order: -1; }
-            .hero-buttons { justify-content: center; }
-            .about-grid { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none !important; }
-            .hamburger { display: flex; }
-            .hero-content h1 { font-size: 2.5em; }
-            .profile-circle { width: 250px; height: 250px; }
-            /* Mobile adjustments for Experience section */
-            .exp-header { flex-direction: column; }
-            .toggle-btn { margin-top: 10px; margin-left: auto; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Toast Notification -->
     <div id="toast"><i class="fa-solid fa-check-circle"></i> Email copied to clipboard!</div>
@@ -824,8 +31,10 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
+                <li><a href="#awards">Awards</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Certifications</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
 
@@ -844,8 +53,10 @@
             <li><a href="#home" onclick="toggleMenu()">Home</a></li>
             <li><a href="#about" onclick="toggleMenu()">About</a></li>
             <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+            <li><a href="#awards" onclick="toggleMenu()">Awards</a></li>
             <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
             <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
+            <li><a href="#education" onclick="toggleMenu()">Certifications</a></li>
             <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
         </ul>
     </div>
@@ -858,7 +69,8 @@
             <p class="subtitle">Senior Java Backend Developer specializing in Cloud Architecture & Microservices</p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                <a href="Ijaz_Senior_Java_Dev.pdf" download class="btn btn-secondary"><i class="fa-solid fa-download"></i> Download Resume</a>
+                <a href="Ijaz_Senior_Java_Dev.pdf" download class="btn btn-secondary"><i
+                        class="fa-solid fa-download"></i> Download Resume</a>
             </div>
             <div class="social-links">
                 <a href="https://linkedin.com/in/ijazahmedva" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
@@ -877,11 +89,17 @@
         <h2 class="section-title">About Me</h2>
         <div class="about-grid">
             <div class="about-text">
-                <p>Passionate backend engineer with a proven track record in delivering high-impact projects for connected vehicle platforms. Specialized in Spring Boot microservices, cloud architecture, and cost optimization. International experience collaborating with teams in Japan. Recognized for technical innovation with multiple company awards and hackathon victories.</p>
+                <p>Passionate backend engineer with a proven track record in delivering high-impact projects for
+                    connected vehicle platforms. Specialized in Spring Boot microservices, cloud architecture, and cost
+                    optimization. International experience collaborating with teams in Japan. Recognized for technical
+                    innovation with multiple company awards and hackathon victories.</p>
                 <ul class="about-highlights">
-                    <li><strong>International Experience:</strong> 3-month collaboration at Nissan Global Headquarters in Yokohama, Japan</li>
-                    <li><strong>Recognition:</strong> Multiple company awards including Sprint Star, Dream Team, and Champions Crew awards</li>
-                    <li><strong>Hackathon Success:</strong> 3-time hackathon winner including Bengaluru Open Mobility Challenge (70,980+ teams)</li>
+                    <li><strong>International Experience:</strong> 3-month collaboration at Nissan Global Headquarters
+                        in Yokohama, Japan</li>
+                    <li><strong>Recognition:</strong> Multiple company awards including Sprint Star, Dream Team, and
+                        Champions Crew awards</li>
+                    <li><strong>Hackathon Success:</strong> 3-time hackathon winner including Bengaluru Open Mobility
+                        Challenge (70,980+ teams)</li>
                 </ul>
             </div>
             <div class="stats-grid">
@@ -908,7 +126,7 @@
     <!-- Experience Section -->
     <section id="experience">
         <h2 class="section-title">Experience</h2>
-        
+
         <div class="experience-card">
             <div class="exp-header">
                 <div class="exp-icon-title">
@@ -926,22 +144,29 @@
                     Show More <i class="fa-solid fa-chevron-down"></i>
                 </button>
             </div>
-            
+
             <div class="exp-summary">
-                Backend development for Global Connected Car Cloud platform with 71+ distributed components supporting real-time vehicle telemetry.
+                Backend development for Global Connected Car Cloud platform with 71+ distributed components supporting
+                real-time vehicle telemetry.
             </div>
 
             <div class="experience-details">
                 <div class="detail-section-title">Key Achievements:</div>
                 <ul class="achievements-list">
-                    <li>Architected scalable multi-tenant data isolation strategy using Strategy Pattern, enabling seamless onboarding of new automotive brands with zero data cross-contamination</li>
-                    <li>Led vehicle service lifecycle refactoring, reducing code duplication by 60% through extensible base entity architecture</li>
-                    <li>Spearheaded cross-platform vehicle migration for 50,000+ customers with zero downtime (Sprint Star Award Q2 FY'25)</li>
-                    <li>3-month onsite assignment at Nissan Global Headquarters in Yokohama, Japan, contributing to electric vehicle program MVP (Champions Crew Award FY'24)</li>
-                    <li>Drove platform cost optimization reducing cloud infrastructure expenses by 35% (Dream Team Award FY'24)</li>
-                    <li>Implemented OCR-based fuel receipt processing using AWS Textract, reducing processing time by 85% with 95% accuracy</li>
+                    <li>Architected scalable multi-tenant data isolation strategy using Strategy Pattern, enabling
+                        seamless onboarding of new automotive brands with zero data cross-contamination</li>
+                    <li>Led vehicle service lifecycle refactoring, reducing code duplication by 60% through extensible
+                        base entity architecture</li>
+                    <li>Spearheaded cross-platform vehicle migration for 50,000+ customers with zero downtime (Sprint
+                        Star Award Q2 FY'25)</li>
+                    <li>3-month onsite assignment at Nissan Global Headquarters in Yokohama, Japan, contributing to
+                        electric vehicle program MVP (Champions Crew Award FY'24)</li>
+                    <li>Drove platform cost optimization reducing cloud infrastructure expenses by 35% (Dream Team Award
+                        FY'24)</li>
+                    <li>Implemented OCR-based fuel receipt processing using AWS Textract, reducing processing time by
+                        85% with 95% accuracy</li>
                 </ul>
-                
+
                 <div class="detail-section-title">Technologies:</div>
                 <div class="exp-tech">
                     <span class="exp-tag">Java</span>
@@ -971,20 +196,25 @@
                     Show More <i class="fa-solid fa-chevron-down"></i>
                 </button>
             </div>
-            
+
             <div class="exp-summary">
-                Designed production-grade REST APIs and voice-enabled features for mobile application backend serving 3,000+ active users.
+                Designed production-grade REST APIs and voice-enabled features for mobile application backend serving
+                3,000+ active users.
             </div>
 
             <div class="experience-details">
                 <div class="detail-section-title">Key Achievements:</div>
                 <ul class="achievements-list">
-                    <li>Built voice-enabled features integrating Amazon Alexa Skills and Google Actions, enhancing user accessibility</li>
-                    <li>Established comprehensive unit testing framework achieving 85%+ code coverage and reducing production defects by 60%</li>
-                    <li>Received Phoenix Award for leadership readiness and technical excellence during executive engagement</li>
-                    <li>Conducted technical training on cloud services and voice assistants, upskilling 25+ engineers with a 4.6/5 rating</li>
+                    <li>Built voice-enabled features integrating Amazon Alexa Skills and Google Actions, enhancing user
+                        accessibility</li>
+                    <li>Established comprehensive unit testing framework achieving 85%+ code coverage and reducing
+                        production defects by 60%</li>
+                    <li>Received Phoenix Award for leadership readiness and technical excellence during executive
+                        engagement</li>
+                    <li>Conducted technical training on cloud services and voice assistants, upskilling 25+ engineers
+                        with a 4.6/5 rating</li>
                 </ul>
-                
+
                 <div class="detail-section-title">Technologies:</div>
                 <div class="exp-tech">
                     <span class="exp-tag">Spring Boot</span>
@@ -1014,9 +244,10 @@
                     Show More <i class="fa-solid fa-chevron-down"></i>
                 </button>
             </div>
-            
+
             <div class="exp-summary">
-                Comprehensive testing of Alexa Mobile Application ensuring robust interoperability between system components.
+                Comprehensive testing of Alexa Mobile Application ensuring robust interoperability between system
+                components.
             </div>
 
             <div class="experience-details">
@@ -1026,7 +257,7 @@
                     <li>Created detailed test cases and test data for integration testing</li>
                     <li>Documented software requirements and user stories using JIRA</li>
                 </ul>
-                
+
                 <div class="detail-section-title">Technologies:</div>
                 <div class="exp-tech">
                     <span class="exp-tag">Testing</span>
@@ -1037,47 +268,303 @@
         </div>
     </section>
 
+    <!-- Awards Section -->
+    <section id="awards">
+        <h2 class="section-title">Awards & Recognition</h2>
+
+        <!-- Company Awards -->
+        <div class="awards-subtitle">
+            <i class="fa-solid fa-ribbon"></i> Company Awards
+        </div>
+
+        <div class="awards-grid" style="margin-bottom: 50px;">
+            <!-- Sprint Star Award -->
+            <div class="award-card">
+                <div class="award-header">
+                    <div class="award-icon"><i class="fa-solid fa-medal"></i></div>
+                    <div class="award-info">
+                        <h4>Sprint Star Award</h4>
+                        <div class="award-company">Renault Nissan</div>
+                    </div>
+                </div>
+                <div class="award-desc">
+                    Cross-platform vehicle migration initiative
+                </div>
+                <div class="award-tag">Q2 FY'25</div>
+            </div>
+
+            <!-- Dream Team Award -->
+            <div class="award-card">
+                <div class="award-header">
+                    <div class="award-icon"><i class="fa-solid fa-medal"></i></div>
+                    <div class="award-info">
+                        <h4>Dream Team Award</h4>
+                        <div class="award-company">Renault Nissan</div>
+                    </div>
+                </div>
+                <div class="award-desc">
+                    Platform cost optimization (35% savings)
+                </div>
+                <div class="award-tag">FY'24</div>
+            </div>
+
+            <!-- Champions Crew Award -->
+            <div class="award-card">
+                <div class="award-header">
+                    <div class="award-icon"><i class="fa-solid fa-medal"></i></div>
+                    <div class="award-info">
+                        <h4>Champions Crew Award</h4>
+                        <div class="award-company">Renault Nissan</div>
+                    </div>
+                </div>
+                <div class="award-desc">
+                    Electric vehicle program MVP delivery
+                </div>
+                <div class="award-tag">FY'24</div>
+            </div>
+
+            <!-- Phoenix Award -->
+            <div class="award-card">
+                <div class="award-header">
+                    <div class="award-icon"><i class="fa-solid fa-medal"></i></div>
+                    <div class="award-info">
+                        <h4>Phoenix Award</h4>
+                        <div class="award-company">Renault Nissan</div>
+                    </div>
+                </div>
+                <div class="award-desc">
+                    Executive presentation and technical excellence
+                </div>
+                <div class="award-tag">FY'24</div>
+            </div>
+
+            <!-- Innovation Service Gold Award -->
+            <div class="award-card">
+                <div class="award-header">
+                    <div class="award-icon"><i class="fa-solid fa-medal"></i></div>
+                    <div class="award-info">
+                        <h4>Innovation Service Gold Award</h4>
+                        <div class="award-company">Renault Nissan</div>
+                    </div>
+                </div>
+                <div class="award-desc">
+                    Technical innovation
+                </div>
+                <div class="award-tag">FY'22</div>
+            </div>
+
+            <!-- Star of the Month -->
+            <div class="award-card">
+                <div class="award-header">
+                    <div class="award-icon"><i class="fa-solid fa-medal"></i></div>
+                    <div class="award-info">
+                        <h4>Star of the Month</h4>
+                        <div class="award-company">Renault Nissan</div>
+                    </div>
+                </div>
+                <div class="award-desc">
+                    Outstanding performance
+                </div>
+                <div class="award-tag">Multiple</div>
+            </div>
+        </div>
+
+        <!-- Hackathon Victories -->
+        <div class="awards-subtitle">
+            <i class="fa-solid fa-trophy"></i> Hackathon Victories
+        </div>
+
+        <div class="awards-grid">
+            <!-- Cricket Code Champions -->
+            <div class="award-card">
+                <div class="award-header">
+                    <div class="award-icon purple"><i class="fa-solid fa-trophy"></i></div>
+                    <div class="award-info">
+                        <h4>Cricket Code Champions</h4>
+                    </div>
+                </div>
+                <div class="award-tag purple-light" style="margin-bottom: 15px;">Honorable Mention</div>
+                <div class="hackathon-meta">
+                    <span class="hackathon-year">2023</span>
+                    <span class="hackathon-teams">1,762 teams</span>
+                </div>
+            </div>
+
+            <!-- Bengaluru Open Mobility Challenge -->
+            <div class="award-card">
+                <div class="award-header">
+                    <div class="award-icon purple"><i class="fa-solid fa-trophy"></i></div>
+                    <div class="award-info">
+                        <h4>Bengaluru Open Mobility Challenge</h4>
+                    </div>
+                </div>
+                <div class="award-tag purple" style="margin-bottom: 15px;">Winner</div>
+                <div class="hackathon-meta">
+                    <span class="hackathon-year">2023</span>
+                    <span class="hackathon-teams">70,980 teams</span>
+                </div>
+            </div>
+
+            <!-- ISIT Tech Fest -->
+            <div class="award-card">
+                <div class="award-header">
+                    <div class="award-icon purple"><i class="fa-solid fa-trophy"></i></div>
+                    <div class="award-info">
+                        <h4>ISIT Tech Fest Code Hackathon</h4>
+                    </div>
+                </div>
+                <div class="award-tag purple" style="margin-bottom: 15px;">Winner</div>
+                <div class="hackathon-meta">
+                    <span class="hackathon-year">2022</span>
+                </div>
+            </div>
+
+            <!-- Learning Week Tech Quiz -->
+            <div class="award-card">
+                <div class="award-header">
+                    <div class="award-icon purple"><i class="fa-solid fa-trophy"></i></div>
+                    <div class="award-info">
+                        <h4>Learning Week Tech Quiz</h4>
+                        <div class="award-company">Renault Nissan</div>
+                    </div>
+                </div>
+                <div class="award-tag purple" style="margin-bottom: 15px;">Winner</div>
+                <div class="hackathon-meta">
+                    <span class="hackathon-year">2021</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects">
         <h2 class="section-title">Key Projects</h2>
         <div class="projects-grid">
+            <!-- Project 1 -->
             <div class="project-card">
-                <div class="project-icon"><i class="fa-solid fa-car"></i></div>
-                <h3>Global Connected Car Cloud</h3>
-                <p>Backend platform integrating 71+ distributed components supporting real-time vehicle telemetry.</p>
+                <div class="project-icon-box light">
+                    <i class="fa-regular fa-lightbulb"></i>
+                </div>
+                <h3>Global Connected Car Cloud Platform</h3>
+                <p>Enterprise-scale platform managing 71+ distributed components for real-time vehicle telemetry and
+                    data processing across multiple automotive brands.</p>
+
+                <div class="project-impact">
+                    <div class="impact-label">
+                        <i class="fa-solid fa-arrow-trend-up"></i> Impact
+                    </div>
+                    <div class="impact-text">Serves 50,000+ customers with zero downtime during migration</div>
+                </div>
+
+                <div class="project-achievements">
+                    <span class="achievements-label">Key Achievements:</span>
+                    <ul>
+                        <li>Multi-tenant data isolation architecture</li>
+                        <li>60% reduction in code duplication</li>
+                        <li>Zero data cross-contamination</li>
+                    </ul>
+                </div>
+
                 <div class="tech-stack">
                     <span class="tech-tag">Java</span>
                     <span class="tech-tag">Spring Boot</span>
+                    <span class="tech-tag">Microservices</span>
                     <span class="tech-tag">AWS</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-icon"><i class="fa-solid fa-sync"></i></div>
-                <h3>Cross-Platform Migration</h3>
-                <p>Microservices infrastructure enabling seamless digital experience for 50k+ customers.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Docker</span>
                     <span class="tech-tag">PostgreSQL</span>
                 </div>
             </div>
 
+            <!-- Project 2 -->
             <div class="project-card">
-                <div class="project-icon"><i class="fa-solid fa-file-invoice"></i></div>
-                <h3>OCR Fuel Processing</h3>
-                <p>Automated data entry using AWS Textract, reducing processing time by 85%.</p>
+                <div class="project-icon-box light">
+                    <i class="fa-regular fa-lightbulb"></i>
+                </div>
+                <h3>Cloud Cost Optimization Initiative</h3>
+                <p>Comprehensive platform cost optimization through efficient resource allocation and architectural
+                    improvements.</p>
+
+                <div class="project-impact">
+                    <div class="impact-label">
+                        <i class="fa-solid fa-arrow-trend-up"></i> Impact
+                    </div>
+                    <div class="impact-text">35% reduction in cloud infrastructure expenses</div>
+                </div>
+
+                <div class="project-achievements">
+                    <span class="achievements-label">Key Achievements:</span>
+                    <ul>
+                        <li>Dream Team Award FY'24</li>
+                        <li>Significant cost savings</li>
+                        <li>Improved resource utilization</li>
+                    </ul>
+                </div>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">AWS</span>
+                    <span class="tech-tag">CloudWatch</span>
+                    <span class="tech-tag">Cost Management</span>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="project-icon-box light">
+                    <i class="fa-regular fa-lightbulb"></i>
+                </div>
+                <h3>OCR-Based Fuel Receipt Processing</h3>
+                <p>Automated fuel receipt data extraction using AWS Textract for streamlined expense management.</p>
+
+                <div class="project-impact">
+                    <div class="impact-label">
+                        <i class="fa-solid fa-arrow-trend-up"></i> Impact
+                    </div>
+                    <div class="impact-text">85% reduction in processing time with 95% accuracy</div>
+                </div>
+
+                <div class="project-achievements">
+                    <span class="achievements-label">Key Achievements:</span>
+                    <ul>
+                        <li>Automated data entry</li>
+                        <li>High accuracy rate</li>
+                        <li>Significant time savings</li>
+                    </ul>
+                </div>
+
                 <div class="tech-stack">
                     <span class="tech-tag">AWS Textract</span>
                     <span class="tech-tag">Lambda</span>
+                    <span class="tech-tag">S3</span>
                 </div>
             </div>
-            
+
+            <!-- Project 4 -->
             <div class="project-card">
-                <div class="project-icon"><i class="fa-brands fa-amazon"></i></div>
-                <h3>Alexa Voice Features</h3>
-                <p>Integrated Amazon Alexa Skills and Google Actions for vehicle control.</p>
+                <div class="project-icon-box light">
+                    <i class="fa-regular fa-lightbulb"></i>
+                </div>
+                <h3>Voice-Enabled Vehicle Control</h3>
+                <p>Integration of Amazon Alexa Skills and Google Actions for hands-free vehicle control and information
+                    access.</p>
+
+                <div class="project-impact">
+                    <div class="impact-label">
+                        <i class="fa-solid fa-arrow-trend-up"></i> Impact
+                    </div>
+                    <div class="impact-text">Enhanced user accessibility for 3,000+ active users</div>
+                </div>
+
+                <div class="project-achievements">
+                    <span class="achievements-label">Key Achievements:</span>
+                    <ul>
+                        <li>Multi-platform voice support</li>
+                        <li>Seamless user experience</li>
+                        <li>Expanded platform capabilities</li>
+                    </ul>
+                </div>
+
                 <div class="tech-stack">
-                    <span class="tech-tag">Alexa Skills</span>
+                    <span class="tech-tag">Alexa Skills Kit</span>
+                    <span class="tech-tag">Google Actions</span>
                     <span class="tech-tag">Node.js</span>
                 </div>
             </div>
@@ -1088,46 +575,161 @@
     <section id="skills">
         <h2 class="section-title">Technical Skills</h2>
         <div class="skills-grid">
+            <!-- Languages -->
             <div class="skill-category">
-                <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
-                <h3>Languages</h3>
+                <div class="skill-header">
+                    <div class="skill-icon-small"><i class="fa-solid fa-code"></i></div>
+                    <h3>Languages</h3>
+                </div>
                 <div class="skill-list">
                     <span class="skill-item">Java</span>
                     <span class="skill-item">JavaScript</span>
                     <span class="skill-item">SQL</span>
-                    <span class="skill-item">Python</span>
                 </div>
             </div>
 
+            <!-- Frameworks -->
             <div class="skill-category">
-                <div class="skill-icon"><i class="fa-solid fa-layer-group"></i></div>
-                <h3>Frameworks</h3>
+                <div class="skill-header">
+                    <div class="skill-icon-small"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3>Frameworks</h3>
+                </div>
                 <div class="skill-list">
                     <span class="skill-item">Spring Boot</span>
+                    <span class="skill-item">Spring MVC</span>
                     <span class="skill-item">Hibernate</span>
                     <span class="skill-item">Node.js</span>
-                    <span class="skill-item">JUnit</span>
                 </div>
             </div>
 
+            <!-- Cloud & AWS -->
             <div class="skill-category">
-                <div class="skill-icon"><i class="fa-brands fa-aws"></i></div>
-                <h3>Cloud & AWS</h3>
+                <div class="skill-header">
+                    <div class="skill-icon-small"><i class="fa-brands fa-aws"></i></div>
+                    <h3>Cloud & AWS</h3>
+                </div>
                 <div class="skill-list">
                     <span class="skill-item">Lambda</span>
                     <span class="skill-item">DynamoDB</span>
                     <span class="skill-item">S3</span>
                     <span class="skill-item">API Gateway</span>
+                    <span class="skill-item">Textract</span>
+                    <span class="skill-item">CloudWatch</span>
+                    <span class="skill-item">EC2</span>
+                    <span class="skill-item">IAM</span>
                 </div>
             </div>
-            
-             <div class="skill-category">
-                <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
-                <h3>Databases</h3>
+
+            <!-- Databases -->
+            <div class="skill-category">
+                <div class="skill-header">
+                    <div class="skill-icon-small"><i class="fa-solid fa-database"></i></div>
+                    <h3>Databases</h3>
+                </div>
                 <div class="skill-list">
                     <span class="skill-item">PostgreSQL</span>
+                    <span class="skill-item">DynamoDB</span>
                     <span class="skill-item">MySQL</span>
-                    <span class="skill-item">MongoDB</span>
+                </div>
+            </div>
+
+            <!-- Tools -->
+            <div class="skill-category">
+                <div class="skill-header">
+                    <div class="skill-icon-small"><i class="fa-solid fa-wrench"></i></div>
+                    <h3>Tools</h3>
+                </div>
+                <div class="skill-list">
+                    <span class="skill-item">Maven</span>
+                    <span class="skill-item">Git</span>
+                    <span class="skill-item">JIRA</span>
+                    <span class="skill-item">Docker</span>
+                    <span class="skill-item">CI/CD</span>
+                </div>
+            </div>
+
+            <!-- Testing -->
+            <div class="skill-category">
+                <div class="skill-header">
+                    <div class="skill-icon-small"><i class="fa-solid fa-vial"></i></div>
+                    <h3>Testing</h3>
+                </div>
+                <div class="skill-list">
+                    <span class="skill-item">JUnit</span>
+                    <span class="skill-item">Mockito</span>
+                </div>
+            </div>
+
+            <!-- Architecture -->
+            <div class="skill-category">
+                <div class="skill-header">
+                    <div class="skill-icon-small"><i class="fa-solid fa-sitemap"></i></div>
+                    <h3>Architecture</h3>
+                </div>
+                <div class="skill-list">
+                    <span class="skill-item">Microservices</span>
+                    <span class="skill-item">REST APIs</span>
+                    <span class="skill-item">Design Patterns</span>
+                    <span class="skill-item">Cloud Migration</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certifications Section -->
+    <section id="education">
+        <h2 class="section-title">Education & Certifications</h2>
+
+        <div class="edu-cert-grid">
+            <!-- Education Column -->
+            <div class="education-column">
+                <div class="section-subtitle">
+                    <i class="fa-solid fa-graduation-cap"></i> Education
+                </div>
+                <div class="education-card">
+                    <div class="edu-degree">Bachelor of Technology</div>
+                    <div class="edu-field">Electronics and Communications Engineering</div>
+                    <div class="edu-school">B.S. Abdur Rahman Institute of Science & Technology</div>
+                    <div class="edu-meta">June 2016 - June 2020 &bull; Chennai, India</div>
+                    <div class="edu-badge">CGPA: 8.1/10</div>
+                </div>
+            </div>
+
+            <!-- Certifications Column -->
+            <div class="certifications-column">
+                <div class="section-subtitle">
+                    <i class="fa-solid fa-certificate"></i> Certifications
+                </div>
+                <div class="cert-list">
+                    <!-- Azure Fundamentals -->
+                    <div class="cert-card">
+                        <div class="cert-info">
+                            <h4>Microsoft Certified: Azure Fundamentals</h4>
+                            <div class="cert-issuer">Microsoft</div>
+                            <div class="cert-id">Credential: H524-1336</div>
+                        </div>
+                        <div class="cert-status status-active">Active</div>
+                    </div>
+
+                    <!-- Azure AI Fundamentals -->
+                    <div class="cert-card">
+                        <div class="cert-info">
+                            <h4>Microsoft Certified: Azure AI Fundamentals</h4>
+                            <div class="cert-issuer">Microsoft</div>
+                            <div class="cert-id">Credential: H824-4822</div>
+                        </div>
+                        <div class="cert-status status-active">Active</div>
+                    </div>
+
+                    <!-- AWS Solutions Architect -->
+                    <div class="cert-card">
+                        <div class="cert-info">
+                            <h4>AWS Certified Solutions Architect - Associate</h4>
+                            <div class="cert-issuer">Amazon Web Services</div>
+                            <div class="cert-id">Credential: E7CWV7RJF21EQL96</div>
+                        </div>
+                        <div class="cert-status status-previous">Previous</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1137,18 +739,18 @@
     <section id="contact">
         <h2>Get In Touch</h2>
         <p style="margin-bottom: 40px;">Always open to discussing new opportunities and collaborations.</p>
-        
+
         <div class="contact-grid">
             <div class="contact-item">
                 <h4><i class="fa-solid fa-envelope"></i> Email</h4>
                 <a onclick="copyEmail(event)">ijazahmed619@gmail.com</a>
             </div>
-            
+
             <div class="contact-item">
                 <h4><i class="fa-solid fa-phone"></i> Phone</h4>
                 <a href="tel:+919841299422">+91 9841299422</a>
             </div>
-            
+
             <div class="contact-item">
                 <h4><i class="fa-brands fa-linkedin"></i> LinkedIn</h4>
                 <a href="https://linkedin.com/in/ijazahmedva" target="_blank">View Profile</a>
@@ -1162,23 +764,26 @@
             <!-- Footer About -->
             <div class="footer-about">
                 <h3>Ijaz Ahmed V A</h3>
-                <p>Senior Java Backend Developer specializing in cloud architecture, microservices, and scalable solutions.</p>
+                <p>Senior Java Backend Developer specializing in cloud architecture, microservices, and scalable
+                    solutions.</p>
                 <div class="social-links">
-                    <a href="https://linkedin.com/in/ijazahmedva" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://linkedin.com/in/ijazahmedva" target="_blank"><i
+                            class="fa-brands fa-linkedin"></i></a>
                 </div>
             </div>
-            
+
             <!-- Footer Links -->
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="#about">About</a></li>
                     <li><a href="#experience">Experience</a></li>
+                    <li><a href="#awards">Awards</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#skills">Skills</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-links">
                 <h4>Connect</h4>
                 <ul>
@@ -1187,89 +792,22 @@
                 </ul>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p>&copy; 2026 Ijaz Ahmed V A. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Scripts -->
+    <script src="script.js"></script>
     <script>
-        // Copy Email to Clipboard
-        function copyEmail(event) {
-            event.preventDefault(); // Stop standard link behavior
-            const email = "ijazahmed619@gmail.com";
-            
-            navigator.clipboard.writeText(email).then(() => {
-                // Show Toast Notification
-                const toast = document.getElementById("toast");
-                toast.className = "show";
-                
-                // Hide after 3 seconds
-                setTimeout(function(){ 
-                    toast.className = toast.className.replace("show", ""); 
-                }, 3000);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-            });
-        }
-
-        // Toggle Mobile Menu
-        function toggleMenu() {
-            const hamburger = document.querySelector('.hamburger');
-            const mobileMenu = document.getElementById('mobileMenu');
-            hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        }
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const hamburger = document.querySelector('.hamburger');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const nav = document.querySelector('nav');
-            
-            if (!nav.contains(event.target) && !mobileMenu.contains(event.target) && mobileMenu.classList.contains('active')) {
-                toggleMenu();
+        // Initialize ScrollSpy on load since content is static
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof initScrollSpy === "function") {
+                initScrollSpy();
             }
-        });
-
-        // Toggle Experience Details
-        function toggleExp(btn) {
-            // Find parent card
-            const card = btn.closest('.experience-card');
-            // Find details section
-            const details = card.querySelector('.experience-details');
-            // Toggle visibility
-            details.classList.toggle('show');
-            
-            // Update button text and icon
-            if (details.classList.contains('show')) {
-                btn.innerHTML = 'Show Less <i class="fa-solid fa-chevron-up"></i>';
-            } else {
-                btn.innerHTML = 'Show More <i class="fa-solid fa-chevron-down"></i>';
-            }
-        }
-
-        // ScrollSpy
-        const sections = document.querySelectorAll('section');
-        const navLi = document.querySelectorAll('.nav-links a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= (sectionTop - 150)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLi.forEach(a => {
-                a.classList.remove('active-link');
-                if (a.getAttribute('href').includes(current)) {
-                    a.classList.add('active-link');
-                }
-            });
         });
     </script>
 </body>
+
 </html>
