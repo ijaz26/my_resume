@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +33,7 @@
         header {
             background: var(--white);
             padding: 20px 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -148,7 +149,7 @@
             border-radius: 50%;
             overflow: hidden;
             border: 10px solid var(--bg-light);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
             position: relative;
         }
 
@@ -322,7 +323,7 @@
 
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .project-icon {
@@ -465,19 +466,22 @@
             gap: 40px;
         }
 
-        .education-card, .cert-card {
+        .education-card,
+        .cert-card {
             background: var(--white);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 35px;
         }
 
-        .education-card h3, .cert-card h3 {
+        .education-card h3,
+        .cert-card h3 {
             font-size: 1.3em;
             margin-bottom: 15px;
         }
 
-        .education-card p, .cert-card p {
+        .education-card p,
+        .cert-card p {
             color: var(--text-light);
             margin-bottom: 10px;
         }
@@ -529,7 +533,7 @@
         }
 
         .contact-item {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             padding: 25px;
             border-radius: 12px;
             backdrop-filter: blur(10px);
@@ -599,6 +603,46 @@
             color: #9CA3AF;
         }
 
+        /* Mobile Menu Styling */
+        .mobile-menu {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 70px;
+            /* Height of your header */
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            text-align: center;
+        }
+
+        /* This class is added by your JavaScript when clicked */
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .mobile-menu ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu ul li a:hover {
+            color: var(--primary-color);
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .hero {
@@ -625,19 +669,32 @@
             .footer-content {
                 grid-template-columns: 1fr;
             }
+
+            .hamburger {
+                display: flex;
+                /* Display hamburger menu only on smaller screens */
+            }
+
+            .mobile-menu {
+                display: block;
+                /* Display mobile menu only on smaller screens */
+            }
+
+            .nav-links {
+                display: none;
+                /* Hide desktop menu on smaller screens */
+            }
         }
 
         @media (max-width: 768px) {
             .nav-links {
                 display: none !important;
+                /* Hide desktop links on mobile */
             }
 
             .hamburger {
                 display: flex;
-            }
-
-            .mobile-menu {
-                display: block;
+                /* Show hamburger on mobile */
             }
 
             .hero-content h1 {
@@ -664,9 +721,19 @@
             .hero-buttons {
                 flex-direction: column;
             }
+
+            /* Removed the .mobile-menu { display: block } rule 
+       so it stays hidden until the .active class is added */
+        }
+
+        /* Remove Send Message button */
+        #contact .btn {
+            display: none;
+            /* Hide the Send Message button */
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header>
@@ -709,7 +776,7 @@
             <h1>Ijaz Ahmed</h1>
             <p class="subtitle">Senior Java Backend Developer specializing in Cloud Architecture & Microservices</p>
             <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">Hire Me</a>
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
                 <a href="Ijaz_Senior_Java_Dev.pdf" download class="btn btn-secondary">Download Resume</a>
             </div>
             <div class="social-links">
@@ -720,7 +787,8 @@
         </div>
         <div class="hero-image">
             <div class="profile-circle">
-                <img id="profileImage" src="profile.jpg" alt="Ijaz Ahmed" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27350%27 height=%27350%27%3E%3Crect fill=%27%234F46E5%27 width=%27350%27 height=%27350%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-size=%27120%27 fill=%27white%27 font-family=%27Arial%27%3EIA%3C/text%3E%3C/svg%3E'">
+                <img id="profileImage" src="profile.jpg" alt="Ijaz Ahmed"
+                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27350%27 height=%27350%27%3E%3Crect fill=%27%234F46E5%27 width=%27350%27 height=%27350%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-size=%27120%27 fill=%27white%27 font-family=%27Arial%27%3EIA%3C/text%3E%3C/svg%3E'">
             </div>
         </div>
     </section>
@@ -730,9 +798,15 @@
         <h2 class="section-title">About Me</h2>
         <div class="about-grid">
             <div class="about-text">
-                <p>Azure and AWS-trained Senior Java Backend Developer with 5+ years of experience architecting scalable microservices and leading cloud migration initiatives. Currently working at Renault Nissan Technology & Business Centre India.</p>
-                <p>Proven track record of delivering high-impact projects including cross-platform vehicle migration architecture, cost optimization solutions achieving 35% savings, and next-generation electric vehicle platforms.</p>
-                <p>Multiple award winner with expertise in Java, Spring Boot, AWS, and RESTful APIs. Strong collaborator with international experience at Nissan Global Headquarters in Yokohama, Japan, and consistent recognition for technical innovation and team leadership.</p>
+                <p>Azure and AWS-trained Senior Java Backend Developer with 5+ years of experience architecting scalable
+                    microservices and leading cloud migration initiatives. Currently working at Renault Nissan
+                    Technology & Business Centre India.</p>
+                <p>Proven track record of delivering high-impact projects including cross-platform vehicle migration
+                    architecture, cost optimization solutions achieving 35% savings, and next-generation electric
+                    vehicle platforms.</p>
+                <p>Multiple award winner with expertise in Java, Spring Boot, AWS, and RESTful APIs. Strong collaborator
+                    with international experience at Nissan Global Headquarters in Yokohama, Japan, and consistent
+                    recognition for technical innovation and team leadership.</p>
             </div>
             <div class="stats-grid">
                 <div class="stat-card">
@@ -758,7 +832,7 @@
     <!-- Experience Section -->
     <section id="experience">
         <h2 class="section-title">Experience</h2>
-        
+
         <div class="experience-item">
             <div class="experience-header">
                 <div>
@@ -832,7 +906,8 @@
             <div class="project-card">
                 <div class="project-icon">🚗</div>
                 <h3>Global Connected Car Cloud Platform</h3>
-                <p>Backend development for platform integrating 71+ distributed components supporting real-time vehicle telemetry across multiple regions.</p>
+                <p>Backend development for platform integrating 71+ distributed components supporting real-time vehicle
+                    telemetry across multiple regions.</p>
                 <div class="tech-stack">
                     <span class="tech-tag">Java</span>
                     <span class="tech-tag">Spring Boot</span>
@@ -844,7 +919,8 @@
             <div class="project-card">
                 <div class="project-icon">🔄</div>
                 <h3>Cross-Platform Vehicle Migration</h3>
-                <p>Architected microservices infrastructure enabling seamless digital experience for 50,000+ customers with zero downtime.</p>
+                <p>Architected microservices infrastructure enabling seamless digital experience for 50,000+ customers
+                    with zero downtime.</p>
                 <div class="tech-stack">
                     <span class="tech-tag">Spring Boot</span>
                     <span class="tech-tag">PostgreSQL</span>
@@ -855,7 +931,8 @@
             <div class="project-card">
                 <div class="project-icon">📄</div>
                 <h3>OCR-Based Fuel Receipt Processing</h3>
-                <p>Automated data entry using AWS Textract, reducing processing time by 85% and improving accuracy to 95%.</p>
+                <p>Automated data entry using AWS Textract, reducing processing time by 85% and improving accuracy to
+                    95%.</p>
                 <div class="tech-stack">
                     <span class="tech-tag">AWS Textract</span>
                     <span class="tech-tag">Lambda</span>
@@ -866,7 +943,8 @@
             <div class="project-card">
                 <div class="project-icon">🎤</div>
                 <h3>Voice-Enabled Mobile Features</h3>
-                <p>Integrated Amazon Alexa Skills and Google Actions, enhancing user accessibility through voice interfaces.</p>
+                <p>Integrated Amazon Alexa Skills and Google Actions, enhancing user accessibility through voice
+                    interfaces.</p>
                 <div class="tech-stack">
                     <span class="tech-tag">Alexa Skills Kit</span>
                     <span class="tech-tag">Node.js</span>
@@ -877,7 +955,8 @@
             <div class="project-card">
                 <div class="project-icon">🏠</div>
                 <h3>IoT Home Automation</h3>
-                <p>Developed IoT solution using ESP32 and Raspberry Pi with real-time device communication and control.</p>
+                <p>Developed IoT solution using ESP32 and Raspberry Pi with real-time device communication and control.
+                </p>
                 <div class="tech-stack">
                     <span class="tech-tag">IoT</span>
                     <span class="tech-tag">MQTT</span>
@@ -888,7 +967,8 @@
             <div class="project-card">
                 <div class="project-icon">♿</div>
                 <h3>Accessibility Solutions</h3>
-                <p>Hackathon-winning accessibility solutions for visually impaired users. Competed against 1,762 teams.</p>
+                <p>Hackathon-winning accessibility solutions for visually impaired users. Competed against 1,762 teams.
+                </p>
                 <div class="tech-stack">
                     <span class="tech-tag">JavaScript</span>
                     <span class="tech-tag">Accessibility</span>
@@ -1060,13 +1140,13 @@
                         <p style="font-size: 0.9em;">H524-1336</p>
                         <span class="cert-badge">Active</span>
                     </div>
-                    
+
                     <div style="margin-top: 20px;">
                         <p><strong>Microsoft Certified: Azure AI Fundamentals</strong></p>
                         <p style="font-size: 0.9em;">H824-4822</p>
                         <span class="cert-badge">Active</span>
                     </div>
-                    
+
                     <div style="margin-top: 20px;">
                         <p><strong>AWS Certified Solutions Architect</strong></p>
                         <p style="font-size: 0.9em;">E7CWV7RJF21EQL96</p>
@@ -1081,26 +1161,22 @@
     <section id="contact">
         <h2>Get In Touch</h2>
         <p>I'm always open to discussing new opportunities, innovative projects, or collaborations.</p>
-        
+
         <div class="contact-grid">
             <div class="contact-item">
                 <h4>📧 Email</h4>
                 <a href="mailto:ijazahmed619@gmail.com">ijazahmed619@gmail.com</a>
             </div>
-            
+
             <div class="contact-item">
                 <h4>📱 Phone</h4>
                 <a href="tel:+919841299422">+91 9841299422</a>
             </div>
-            
+
             <div class="contact-item">
                 <h4>💼 LinkedIn</h4>
                 <a href="https://linkedin.com/in/ijazahmedva" target="_blank">linkedin.com/in/ijazahmedva</a>
             </div>
-        </div>
-
-        <div style="margin-top: 40px;">
-            <a href="mailto:ijazahmed619@gmail.com?subject=Let's Connect&body=Hi Ijaz,%0D%0A%0D%0AI came across your portfolio and would like to connect with you.%0D%0A%0D%0A" class="btn" style="background: white; color: #4F46E5;">Send Message</a>
         </div>
     </section>
 
@@ -1109,14 +1185,15 @@
         <div class="footer-content">
             <div class="footer-about">
                 <h3>Ijaz Ahmed V A</h3>
-                <p>Senior Java Backend Developer specializing in cloud architecture, microservices, and scalable solutions. Based in Chennai, India.</p>
+                <p>Senior Java Backend Developer specializing in cloud architecture, microservices, and scalable
+                    solutions. Based in Chennai, India.</p>
                 <div class="social-links">
                     <a href="https://linkedin.com/in/ijazahmedva" target="_blank">LinkedIn</a>
                     <a href="https://github.com/ijazahmedva" target="_blank">GitHub</a>
                     <a href="mailto:ijazahmed619@gmail.com">Email</a>
                 </div>
             </div>
-            
+
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
@@ -1126,7 +1203,7 @@
                     <li><a href="#skills">Skills</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-links">
                 <h4>Connect</h4>
                 <ul>
@@ -1136,7 +1213,7 @@
                 </ul>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p>&copy; 2026 Ijaz Ahmed V A. All rights reserved. Built with passion and code.</p>
         </div>
@@ -1146,7 +1223,7 @@
         function toggleMenu() {
             const hamburger = document.querySelector('.hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
-            
+
             hamburger.classList.toggle('active');
             mobileMenu.classList.toggle('active');
         }
@@ -1154,17 +1231,17 @@
         function closeMenu() {
             const hamburger = document.querySelector('.hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
-            
+
             hamburger.classList.remove('active');
             mobileMenu.classList.remove('active');
         }
 
         // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const hamburger = document.querySelector('.hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
             const nav = document.querySelector('nav');
-            
+
             if (!nav.contains(event.target) && !mobileMenu.contains(event.target)) {
                 hamburger.classList.remove('active');
                 mobileMenu.classList.remove('active');
@@ -1186,4 +1263,5 @@
         });
     </script>
 </body>
+
 </html>
